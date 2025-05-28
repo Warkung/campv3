@@ -10,6 +10,13 @@ import { AlignLeft, UserCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import links from "@/utils/links";
 import Link from "next/link";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+} from "@clerk/nextjs";
 
 function Dropdown() {
   return (
@@ -21,17 +28,49 @@ function Dropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {links.map((link, index) => {
-          return (
-            <DropdownMenuItem key={index}>
-              <Link href={link.href} className="capitalize hover:bg-red-500 w-full rounded "><p className="px-2 py-1">{link.label}</p></Link>
-            </DropdownMenuItem>
-          );
-        })}
-        <DropdownMenuSeparator />
-        <DropdownMenuItem ><Link href={'/'} className="capitalize hover:bg-red-500 w-full rounded py-1 ">log out</Link  ></DropdownMenuItem>
+
+        {/* Not Login */}
+        <SignedOut>
+          <DropdownMenuItem>
+            <SignInButton>
+              <button className="min-w-[100px] w-full rounded text-start capitaliz hover:cursor-pointer">
+                Login
+              </button>
+            </SignInButton>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <SignUpButton>
+              <button className="min-w-[100px] w-full rounded text-start capitaliz hover:cursor-pointer">
+                Register
+              </button>
+            </SignUpButton>
+          </DropdownMenuItem>
+        </SignedOut>
+
+        {/* Login Already */}
+        <SignedIn>
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {links.map((link, index) => {
+            return (
+              <DropdownMenuItem key={index}>
+                <Link href={link.href}>
+                  <button className="min-w-[100px] w-full rounded text-start capitaliz hover:cursor-pointer capitalize">
+                    {link.label}
+                  </button>
+                </Link>
+              </DropdownMenuItem>
+            );
+          })}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <SignOutButton>
+              <button className="min-w-[100px] w-full rounded text-start capitaliz hover:cursor-pointer hover:bg-red-500 pt-1 pb-1.5 ">
+                Logout
+              </button>
+            </SignOutButton>
+          </DropdownMenuItem>
+        </SignedIn>
       </DropdownMenuContent>
     </DropdownMenu>
   );
