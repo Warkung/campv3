@@ -26,10 +26,12 @@ function Dropdown() {
         {links.map((link, index) => {
           return (
             <DropdownMenuItem key={index}>
-              <Link href={link.href}>{link.label}</Link>
+              <Link href={link.href} className="capitalize hover:bg-red-500 w-full rounded "><p className="px-2 py-1">{link.label}</p></Link>
             </DropdownMenuItem>
           );
         })}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem ><Link href={'/'} className="capitalize hover:bg-red-500 w-full rounded py-1 ">log out</Link  ></DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
