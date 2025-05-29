@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,8 +19,13 @@ import {
   SignOutButton,
   SignUpButton,
 } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 function Dropdown() {
+  const handleLogout = () => {
+    toast("Logout Successfully.");
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,18 +35,17 @@ function Dropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-
         {/* Not Login */}
         <SignedOut>
           <DropdownMenuItem>
-            <SignInButton>
+            <SignInButton mode="modal">
               <button className="min-w-[100px] w-full rounded text-start capitaliz hover:cursor-pointer">
                 Login
               </button>
             </SignInButton>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <SignUpButton>
+            <SignUpButton mode="modal">
               <button className="min-w-[100px] w-full rounded text-start capitaliz hover:cursor-pointer">
                 Register
               </button>
@@ -65,7 +71,10 @@ function Dropdown() {
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignOutButton>
-              <button className="min-w-[100px] w-full rounded text-start capitaliz hover:cursor-pointer hover:bg-red-500 pt-1 pb-1.5 ">
+              <button
+                onClick={handleLogout}
+                className="min-w-[100px] w-full rounded text-start capitaliz hover:cursor-pointer hover:bg-red-500 pt-1 pb-1.5 "
+              >
                 Logout
               </button>
             </SignOutButton>
