@@ -1,13 +1,7 @@
+import createProfileAction from "@/actions/action";
 import ButtonForm from "@/components/form/ButtonForm";
 import FormContainer from "@/components/form/FormContainer";
 import InputForm from "@/components/form/InputForm";
-
-const createProfileAction = async (prevState: any, formData: FormData) => {
-  "use server";
-  const firstName = formData.get("firstName");
-  console.log(`Hello from server: ${firstName}`);
-  return { message: "Create Profile Success!" };
-};
 
 function CreatePage() {
   return (
@@ -29,10 +23,10 @@ function CreatePage() {
               placeholder="Doe"
             />
             <InputForm
-              title="Email:"
-              type="email"
-              name="email"
-              placeholder="elizamccardlejohson@ altostrat.com"
+              title="Username:"
+              type="text"
+              name="username"
+              placeholder="johndoe"
             />
           </div>
           <ButtonForm title="Create Profile" type="submit" size="lg" />
