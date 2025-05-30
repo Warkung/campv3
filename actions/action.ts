@@ -2,6 +2,12 @@
 
 import { validateWithZod, profileSchema } from "@/utils/schemas";
 
+const renderError = (error: unknown): { message: string } => {
+  return {
+    message: error instanceof Error ? error.message : "Something went wrong!",
+  };
+};
+
 const createProfileAction = async (prevState: any, formData: FormData) => {
   try {
     const rawData = Object.fromEntries(formData);
@@ -10,11 +16,7 @@ const createProfileAction = async (prevState: any, formData: FormData) => {
 
     return { message: "Create Profile Success!" };
   } catch (error) {
-    if (error instanceof Error) {
-      return { message: error.message };
-    } else {
-      return { message: "Something went wrong!" };
-    }
+    return renderError(error);
   }
 };
 
