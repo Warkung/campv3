@@ -1,11 +1,8 @@
 "use client";
+import { FormContainerProps } from "@/utils/types";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
-type FormContainerProps = {
-  children: React.ReactNode;
-  action: (prevState: any, formData: FormData) => Promise<{ message: string }>;
-};
 
 const initialState = { message: "" };
 

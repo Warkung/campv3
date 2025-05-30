@@ -1,21 +1,21 @@
 "use server";
 
-import { z } from "zod";
-
-const profileSchema = z.object({
-  firstName: z.string().min(1, { message: "First name is required" }),
-  lastName: z.string().min(1, { message: "Last name is required" }),
-  username: z.string().min(1, { message: "username is required" }),
-});
+import { validateWithZod, profileSchema } from "@/utils/schemas";
 
 const createProfileAction = async (prevState: any, formData: FormData) => {
-  const firstName = formData.get("firstName");
-  profileSchema.parse({
-    firstName,
-  });
+  try {
+    const rawData = Object.fromEntries(formData);
+    const validatedData = validateWithZod(profileSchema, rawData);
+    console.log(validatedData);
 
-  console.log(`Hello from server: ${firstName}`);
-  return { message: "Create Profile Success!" };
+    return { message: "Create Profile Success!" };
+  } catch (error) {
+    if (error instanceof Error) {
+      return { message: error.message };
+    } else {
+      return { message: "Something went wrong!" };
+    }
+  }
 };
 
 export default createProfileAction;

@@ -2,13 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useFormStatus } from "react-dom";
 import { Loader } from "lucide-react";
-
-type ButtonFormProps = {
-  title: string;
-  size?: "default" | "sm" | "icon" | "lg";
-  Classname?: string;
-  type: "button" | "submit";
-};
+import { ButtonFormProps } from "@/utils/types";
 
 function ButtonForm({ title, size, type }: ButtonFormProps) {
   const { pending } = useFormStatus();

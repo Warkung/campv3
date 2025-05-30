@@ -1,13 +1,7 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-type InputFormProps = {
-  title: string;
-  type: string;
-  placeholder: string;
-  name: string;
-};
+import { InputFormProps } from "@/utils/types";
 
 function InputForm({ title, type, placeholder, name }: InputFormProps) {
   return (
